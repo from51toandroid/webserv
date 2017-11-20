@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 ZXing authors
+ * Copyright (C) 2012 ZXing authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,21 @@
  * limitations under the License.
  */
 
-//package org.join.zxing.encode;
-
+//package org.join.zxing.common.executor;
 package com.example.dp.webserv;
+import android.annotation.TargetApi;
+import android.os.AsyncTask;
 
 /**
- * Encapsulates some simple formatting logic, to aid refactoring in {@link ContactEncoder}.
- *
- * @author Sean Owen
+ * On Honeycomb and later, {@link AsyncTask} returns to serial execution by default which is undesirable.
+ * This calls Honeycomb-only APIs to request parallel execution.
  */
-public interface Formatter {
+@TargetApi(11)
+public final class HoneycombAsyncTaskExecInterface implements AsyncTaskExecInterface {
 
-    String format(String source);
+  @Override
+  public <T> void execute(AsyncTask<T,?,?> task, T... args) {
+    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, args);
+  }
 
 }

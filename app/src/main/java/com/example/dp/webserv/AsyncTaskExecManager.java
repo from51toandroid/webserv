@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 ZXing authors
+ * Copyright (C) 2012 ZXing authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-//package org.join.zxing.encode;
+//package org.join.zxing.common.executor;
 
 package com.example.dp.webserv;
 
-/**
- * Encapsulates some simple formatting logic, to aid refactoring in {@link ContactEncoder}.
- *
- * @author Sean Owen
- */
-public interface Formatter {
+import com.example.dp.webserv.PlatformSupportManager;
 
-    String format(String source);
+public final class AsyncTaskExecManager extends PlatformSupportManager<AsyncTaskExecInterface> {
+
+  public AsyncTaskExecManager() {
+    super(AsyncTaskExecInterface.class, new DefaultAsyncTaskExecInterface());
+    addImplementationClass(11, HoneycombAsyncTaskExecInterface.class.getName());
+  }
 
 }

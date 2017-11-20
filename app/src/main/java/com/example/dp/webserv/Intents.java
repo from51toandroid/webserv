@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+//package org.join.zxing;
 package com.example.dp.webserv;
 
 /**

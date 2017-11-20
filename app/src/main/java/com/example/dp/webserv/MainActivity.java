@@ -262,6 +262,8 @@ public class MainActivity extends WebServActivity implements View.OnClickListene
         //Log.i(TAG, "temp = " + temp );
         String url = temp + "" + "http://" + ipAddr + ":" + Constants.Config.PORT + "/";
         urlText.setText(url);
+        url = "http://" + ipAddr + ":" + Constants.Config.PORT + "/";
+        generateQRCode(url);
     }
 
     @Override
@@ -557,7 +559,23 @@ public class MainActivity extends WebServActivity implements View.OnClickListene
         cm.setText(text);
     }
 
-
+    private void generateQRCode(String text) {
+        Intent intent = new Intent(Intents.Encode.ACTION);
+        intent.putExtra(Intents.Encode.FORMAT, BarcodeFormat.QR_CODE.toString());
+        intent.putExtra(Intents.Encode.TYPE, Contents.Type.TEXT);
+        intent.putExtra(Intents.Encode.DATA, text);
+        try {
+            int dimension = getDimension();
+            QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(this, intent, dimension, false);
+            Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
+            if (bitmap == null) {
+                Log.w(TAG, "Could not encode barcode");
+            } else {
+                qrCodeView.setImageBitmap(bitmap);
+            }
+        } catch (WriterException e) {
+        }
+    }
 
     private int getDimension() {
         WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);

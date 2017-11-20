@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:textIsSelectable="true"
-            android:textSize="32sp"
+            android:textSize="20sp"
             android:textColor="#ff00ff"/>
 
         <ImageView

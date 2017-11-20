@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 ZXing authors
+ * Copyright (C) 2012 ZXing authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-//package org.join.zxing.encode;
+//package org.join.zxing.camera.open;
 
 package com.example.dp.webserv;
 
-/**
- * Encapsulates some simple formatting logic, to aid refactoring in {@link ContactEncoder}.
- *
- * @author Sean Owen
- */
-public interface Formatter {
+import android.hardware.Camera;
 
-    String format(String source);
+/**
+ * Provides an abstracted means to open a {@link Camera}. The API changes over Android API versions and
+ * this allows the app to use newer API methods while retaining backwards-compatible behavior.
+ */
+public interface OpenCameraInterface {
+
+    Camera open();
 
 }

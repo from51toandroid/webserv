@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 ZXing authors
+ * Copyright (C) 2009 ZXing authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,25 @@
  * limitations under the License.
  */
 
-//package org.join.zxing.encode;
+//package org.join.zxing;
+
 
 package com.example.dp.webserv;
 
-/**
- * Encapsulates some simple formatting logic, to aid refactoring in {@link ContactEncoder}.
- *
- * @author Sean Owen
- */
-public interface Formatter {
+import com.google.zxing.ResultPoint;
+import com.google.zxing.ResultPointCallback;
 
-    String format(String source);
+final class ViewfinderResultPointCallback implements ResultPointCallback {
+
+  private final ViewfinderView viewfinderView;
+
+  ViewfinderResultPointCallback(ViewfinderView viewfinderView) {
+    this.viewfinderView = viewfinderView;
+  }
+
+  @Override
+  public void foundPossibleResultPoint(ResultPoint point) {
+    viewfinderView.addPossibleResultPoint(point);
+  }
 
 }
